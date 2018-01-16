@@ -2,7 +2,7 @@ import React,{Component} from 'react'
 import { Button } from 'antd'
 import { Row, Col,Form,Tooltip,Icon,Cascader,Select,Input } from 'antd'
 import PostImg from './PostImg'
-import pca from './pca.json'
+import pcas from './pcas.json'
 import phone from './phone.json'
 
 const FormItem = Form.Item
@@ -88,15 +88,15 @@ class PostPage extends Component {
           for(let j of key){
             target.push({
               value:j,
-              label:j,                
-            })         
+              label:j,
+            })
           }
         } catch (error) {
           console.log(error.message)
         }
       }
     }
-    pushdata(residences,pca)
+    pushdata(residences,pcas)
     this.setState({residences})
   }
   normFile = (e) => {
@@ -174,6 +174,16 @@ class PostPage extends Component {
                 rules: [{ type: 'array', required: true, message: '请选择住处' }],
               })(
                 <Cascader options={this.state.residences} />
+              )}
+            </FormItem>
+            <FormItem
+              {...formItemLayout}
+              label="详细地址"
+            >
+              {getFieldDecorator('fulllocation', {
+                rules: [{ required: true, message: '请输入详细地址' }],
+              })(
+                <Input />
               )}
             </FormItem>
             <FormItem
